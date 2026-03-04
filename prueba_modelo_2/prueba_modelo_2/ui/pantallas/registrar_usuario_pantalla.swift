@@ -15,10 +15,12 @@ enum CampoRegistrarUsuario: String {
 }
 
 struct RegistrarUsuario: View {
+    @Environment(ControladorGeneral.self) var controlador
+    
     @State var nombre: String = ""
-    @State var instagram: String = ""
-    @State var edad: String = ""
     @State var apodo: String = ""
+    @State var edad: String = ""
+    @State var instagram: String = ""
     
     @State var error: ErrorUI? = nil
     
@@ -26,6 +28,7 @@ struct RegistrarUsuario: View {
         if(error != nil){
             Text("Hay un error, favor de resolverlo")
         }
+        
         VStack{
             //TextField("Nombre", text: $nombre)
             CampoTexto(
@@ -43,7 +46,13 @@ struct RegistrarUsuario: View {
                 id: CampoRegistrarUsuario.apodo.rawValue
             )
             
-            TextField("Edad", text: $edad)
+            //TextField("Edad", text: $edad)
+            CampoTexto(
+                entrada: $edad,
+                placeholder: "edad",
+                error: error,
+                id: CampoRegistrarUsuario.edad.rawValue
+            )
             
             //TextField("Instagram", text: $instagram)
             CampoTexto(
@@ -69,23 +78,44 @@ struct RegistrarUsuario: View {
         if(nombre.isEmpty){
             error = ErrorUI(
                 campo: CampoRegistrarUsuario.nombre.rawValue,
-                error: "No tiene nombre",
-                nivel_de_error: .gravisimo)
+                error: "No ha ingresado su nombre",
+                nivel_de_error: .gravisimo
+            )
+            return
         }
         
         if(apodo.isEmpty){
             error = ErrorUI(
                 campo: CampoRegistrarUsuario.apodo.rawValue,
-                error: "No tiene apodo",
-                nivel_de_error: .gravisimo)
+                error: "No ha ingresado un apodo",
+                nivel_de_error: .gravisimo
+            )
+            return
+        }
+        
+        if(edad.isEmpty){
+            error = ErrorUI(
+                campo: CampoRegistrarUsuario.edad.rawValue,
+                error: "No ha ingresado su edad",
+                nivel_de_error: .gravisimo
+            )
+            return
         }
         
         if(instagram.isEmpty){
             error = ErrorUI(
                 campo: CampoRegistrarUsuario.instagram.rawValue,
                 error: "No ingreso su instagram",
-                nivel_de_error: .gravisimo)
+                nivel_de_error: .gravisimo
+            )
         }
+        
+        controlador.agregar_usuarios(crear_usuario())
+        
+        apodo = ""
+        nombre = ""
+        edad = ""
+        instagram = ""
     }
     
 
@@ -100,4 +130,5 @@ struct RegistrarUsuario: View {
 
 #Preview {
     RegistrarUsuario()
+        .environment(ControladorGeneral())
 }

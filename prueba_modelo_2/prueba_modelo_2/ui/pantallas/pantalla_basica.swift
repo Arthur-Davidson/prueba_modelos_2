@@ -37,7 +37,7 @@ struct PantallaBasica: View {
             }
         
         NavigationLink{
-            // Que pantalla debe sobreponer
+            RegistrarUsuario()
         }
         label: {
             Text("Pantalla a sobreponer")

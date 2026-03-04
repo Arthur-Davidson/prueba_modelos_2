@@ -19,6 +19,18 @@ struct CampoTexto: View {
         TextField(placeholder, text: $entrada)
         
         if(error?.campo == id){
+            switch error!.nivel_de_error {
+            case .gravisimo:
+                Text(error!.error)
+                    .foregroundStyle(Color.red)
+                
+            case .advertencia:
+                Text(error!.error)
+                    .foregroundStyle(Color.yellow)
+                
+            case .bien:
+                Text("")
+            }
             Text(error!.error)
         }
     }
