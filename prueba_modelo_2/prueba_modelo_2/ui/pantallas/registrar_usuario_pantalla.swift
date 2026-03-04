@@ -1,0 +1,103 @@
+//
+//  registrar_usuario_pantalla.swift
+//  prueba_modelo_2
+//
+//  Created by alumno on 3/2/26.
+//
+
+import SwiftUI
+
+enum CampoRegistrarUsuario: String {
+    case nombre = "nombre"
+    case apodo = "apodo"
+    case edad = "edad"
+    case instagram = "instagram"
+}
+
+struct RegistrarUsuario: View {
+    @State var nombre: String = ""
+    @State var instagram: String = ""
+    @State var edad: String = ""
+    @State var apodo: String = ""
+    
+    @State var error: ErrorUI? = nil
+    
+    var body: some View {
+        if(error != nil){
+            Text("Hay un error, favor de resolverlo")
+        }
+        VStack{
+            //TextField("Nombre", text: $nombre)
+            CampoTexto(
+                entrada: $nombre,
+                placeholder: "Nombre",
+                error: error,
+                id: CampoRegistrarUsuario.nombre.rawValue
+            )
+            
+            //TextField("Apodo", text: $apodo)
+            CampoTexto(
+                entrada: $apodo,
+                placeholder: "Apodo",
+                error: error,
+                id: CampoRegistrarUsuario.apodo.rawValue
+            )
+            
+            TextField("Edad", text: $edad)
+            
+            //TextField("Instagram", text: $instagram)
+            CampoTexto(
+                entrada: $instagram,
+                placeholder: "Instagram",
+                error: error,
+                id: CampoRegistrarUsuario.instagram.rawValue
+            )
+            
+            Button(action: {
+                validar_entrada()
+            }){
+                HStack{
+                    Text("Agregar usuario")
+                    Image(systemName: "person.fill.badge.plus")
+                }
+            }
+        }
+        .padding()
+    }
+
+    func validar_entrada(){
+        if(nombre.isEmpty){
+            error = ErrorUI(
+                campo: CampoRegistrarUsuario.nombre.rawValue,
+                error: "No tiene nombre",
+                nivel_de_error: .gravisimo)
+        }
+        
+        if(apodo.isEmpty){
+            error = ErrorUI(
+                campo: CampoRegistrarUsuario.apodo.rawValue,
+                error: "No tiene apodo",
+                nivel_de_error: .gravisimo)
+        }
+        
+        if(instagram.isEmpty){
+            error = ErrorUI(
+                campo: CampoRegistrarUsuario.instagram.rawValue,
+                error: "No ingreso su instagram",
+                nivel_de_error: .gravisimo)
+        }
+    }
+    
+
+    func crear_usuario() -> Usuario{
+        return Usuario(
+            nombre: nombre,
+            edad: Int(edad)!,
+            apodo: apodo,
+            instagram: instagram)
+    }
+}
+
+#Preview {
+    RegistrarUsuario()
+}
