@@ -16,17 +16,36 @@ struct PantallaBasica: View {
         Text("Esta pantalla me mueve a la siguiente opcion")
         
         Spacer()
-        
-        ForEach(controlador.mensajes) { mensaje in
-            NavigationLink{
-                Text("Esta es la pantalla del \(mensaje)")
+        ScrollView(.horizontal){
+            LazyHStack{
+                ForEach(controlador.usuarios) { usuario in
+                    NavigationLink{
+                        Text("Esta es la pantalla del \(usuario)")
+                    }
+                    label: {
+                        EtiquetaUsuarioPerfil(usuario: usuario)
+                            .padding(5)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
-            label: {
-                Text("Aqui pulsa el usuario para ver el mensaje: \(mensaje.texto)")
-            }
-        .onAppear {
-            print("Hola,soy la vista de: \(mensaje)")
         }
+        
+        ScrollView(.vertical){
+            LazyVStack{
+                ForEach(controlador.mensajes) { mensaje in
+                    NavigationLink{
+                        Text("Esta es la pantalla del \(mensaje)")
+                    }
+                    label: {
+                        LazyVStack{
+                            Text("Mensaje de ")
+                            Text("\(mensaje.id_usuario ?? "Anonimo" )")
+                        }
+                        .padding(3)
+                    }
+                }
+            }
         }
         
         Spacer()

@@ -17,6 +17,8 @@ enum CampoRegistrarUsuario: String {
 struct RegistrarUsuario: View {
     @Environment(ControladorGeneral.self) var controlador
     
+    @Environment(\.dismiss) var salir
+    
     @State var nombre: String = ""
     @State var apodo: String = ""
     @State var edad: String = ""
@@ -111,7 +113,7 @@ struct RegistrarUsuario: View {
         }
         
         controlador.agregar_usuarios(crear_usuario())
-        
+        salir()
         apodo = ""
         nombre = ""
         edad = ""
