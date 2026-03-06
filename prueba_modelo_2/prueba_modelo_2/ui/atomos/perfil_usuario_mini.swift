@@ -14,14 +14,15 @@ struct EtiquetaUsuarioPerfil: View {
             Text("Esta conectado: ")
             ZStack(alignment: .bottom)
             {
-                Image("imagen")
+                Image("usuario")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100)
                     .clipShape(Circle())
+                    .padding(30)
                 HStack{
                     Text("\(usuario.apodo)")
-                        .foregroundStyle(Color.purple)
+                        .foregroundStyle(Color.blue)
                     Circle()
                         .frame(width: 15)
                         .foregroundStyle(usuario.conectado ? Color.green : Color.red)

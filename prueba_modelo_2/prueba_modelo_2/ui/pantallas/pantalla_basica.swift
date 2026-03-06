@@ -13,7 +13,12 @@ struct PantallaBasica: View {
     @Environment(ControladorGeneral.self) var controlador
     
     var body: some View {
-        Text("Esta pantalla me mueve a la siguiente opcion")
+        
+        Spacer()
+        
+        VStack{
+            Text("Esta pantalla me mueve a la siguiente opcion")
+        }
         
         Spacer()
         ScrollView(.horizontal){
@@ -38,11 +43,9 @@ struct PantallaBasica: View {
                         Text("Esta es la pantalla del \(mensaje)")
                     }
                     label: {
-                        LazyVStack{
-                            Text("Mensaje de ")
-                            Text("\(mensaje.id_usuario ?? "Anonimo" )")
-                        }
-                        .padding(3)
+                        PrevistaMensaje(mensaje: mensaje)
+                            .padding(.vertical, 5)   // arriba y abajo
+                            .padding(.horizontal, 25) // izquierda y derecha
                     }
                 }
             }
