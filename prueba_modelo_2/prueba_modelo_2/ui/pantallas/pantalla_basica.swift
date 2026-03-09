@@ -19,8 +19,10 @@ struct PantallaBasica: View {
         VStack{
             Text("Esta pantalla me mueve a la siguiente opcion")
         }
+        .foregroundStyle(Color.azulPrincipal)
+        .fontWeight(.bold)
         
-        Spacer()
+        //Spacer()
         ScrollView(.horizontal){
             LazyHStack{
                 ForEach(controlador.usuarios) { usuario in
@@ -52,18 +54,22 @@ struct PantallaBasica: View {
         }
         
         Spacer()
-        
-        Text("Agregar un hola mundo")
-            .onTapGesture {
-                controlador.agregar_mensajes()
+        VStack{
+            Text("Agregar un hola mundo")
+                .onTapGesture {
+                    controlador.agregar_mensajes()
+                }
+                .foregroundStyle(Color.azulPrincipal)
+            
+            NavigationLink{
+                RegistrarUsuario()
             }
-        
-        NavigationLink{
-            RegistrarUsuario()
+            label: {
+                Text("Pantalla a sobreponer")
+                    .foregroundStyle(Color.azulSecundario)
+            }
         }
-        label: {
-            Text("Pantalla a sobreponer")
-        }
+        .padding(15)
         
     }
 }

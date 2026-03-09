@@ -17,17 +17,21 @@ struct PrevistaMensaje: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width:50)
+                .foregroundStyle(Color.azulSecundario)
             
             VStack(alignment: .leading){
                 HStack{
                     Text("\(mensaje.id_usuario ?? "Anonimo" )")
-                        .background(Color.red)
+                        //.background(Color.red)
+                        .foregroundStyle(Color.azulPrincipal)
+                        .fontWeight(.bold)
                     Spacer()
                 }
-                .background(Color.cyan)
+                //.background(Color.cyan)
                 
                     Text("\(mensaje.texto)")
-                        .background(Color.yellow)
+                        //.background(Color.yellow)
+                        .foregroundStyle(Color.azulSecundario)
             }
             Spacer()
         }
@@ -35,8 +39,9 @@ struct PrevistaMensaje: View {
         .frame(height: 75)
         .overlay{
             RoundedRectangle(cornerRadius: 25, style: .circular)
-                .stroke(.black, lineWidth: 5)
+                .stroke(.azulSecundario, lineWidth: 5 )
         }
+
     }
 }
 

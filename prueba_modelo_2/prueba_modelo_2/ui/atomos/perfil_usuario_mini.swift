@@ -11,7 +11,9 @@ struct EtiquetaUsuarioPerfil: View {
     
     var body: some View {
         VStack{
+            
             Text("Esta conectado: ")
+                .foregroundStyle(Color.azulPrincipal)
             ZStack(alignment: .bottom)
             {
                 Image("usuario")
@@ -19,10 +21,12 @@ struct EtiquetaUsuarioPerfil: View {
                     .scaledToFit()
                     .frame(width: 100)
                     .clipShape(Circle())
-                    .padding(30)
+                    .padding(.vertical, 30)   // arriba y abajo
+                    .padding(.horizontal, 25) // izquierda y derecha
                 HStack{
                     Text("\(usuario.apodo)")
-                        .foregroundStyle(Color.blue)
+                        .foregroundStyle(Color.azulPrincipal)
+                        .fontWeight(.bold)
                     Circle()
                         .frame(width: 15)
                         .foregroundStyle(usuario.conectado ? Color.green : Color.red)
@@ -31,7 +35,7 @@ struct EtiquetaUsuarioPerfil: View {
 
         }
         .padding(15)
-        .background(Color.gray)
+        .background(Color.gris)
         .cornerRadius(25)
         
     }

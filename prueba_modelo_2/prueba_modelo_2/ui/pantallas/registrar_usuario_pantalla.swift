@@ -51,7 +51,7 @@ struct RegistrarUsuario: View {
             //TextField("Edad", text: $edad)
             CampoTexto(
                 entrada: $edad,
-                placeholder: "edad",
+                placeholder: "Edad",
                 error: error,
                 id: CampoRegistrarUsuario.edad.rawValue
             )
