@@ -17,7 +17,7 @@ struct PantallaUsuario: View {
             
             Spacer()
             
-            Text("Esta conectado:")
+            Text("Estado: \(usuario.conectado ? "Conectado" : "Desconectado")")
                 .foregroundStyle(Color.azulPrincipal)
                 .font(.title3)
             
@@ -34,7 +34,7 @@ struct PantallaUsuario: View {
                     Text(usuario.apodo)
                         .foregroundStyle(Color.azulPrincipal)
                         .fontWeight(.bold)
-                        .font(.system(size: 24))
+                        .font(.system(size: 30))
                     
                     Circle()
                         .frame(width: 15)

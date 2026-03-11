@@ -31,7 +31,7 @@ struct PantallaBasica: View {
             
             
             // Seccion Usuarios
-            VStack(alignment: .leading){
+            VStack(){
                 
                 Text("Usuarios")
                     .font(.headline)
@@ -57,9 +57,8 @@ struct PantallaBasica: View {
                 }
             }
             
-            
             // Seccion Mensajes
-            VStack(alignment: .leading){
+            VStack(){
                 
                 Text("Mensajes")
                     .font(.headline)
@@ -77,17 +76,13 @@ struct PantallaBasica: View {
                             label: {
                                 PrevistaMensaje(mensaje: mensaje)
                                     .padding(.vertical, 5)
-                                    .padding(.horizontal, 20)
+                                    .padding(.horizontal, 30)
                             }
                             
                         }
                     }
                 }
             }
-            
-            
-            Spacer()
-            
             
             // Botones de agregar mensaje y registrar usuario
             VStack(spacing: 10){
@@ -116,13 +111,14 @@ struct PantallaBasica: View {
                     Text("Registrar nuevo usuario")
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.azulSecundario)
-                        .foregroundStyle(.white)
+                        .background(Color.gris)
+                        .foregroundStyle(.azulPrincipal)
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
                 
             }
             .padding()
+            .background(Color.azulSecundario)
             
         }
         .background(Color.gris)
