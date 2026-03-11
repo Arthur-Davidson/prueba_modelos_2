@@ -12,7 +12,7 @@ struct NavegadorBasico: View {
     @Environment(ControladorGeneral.self) var control
     
     init() {
-        // color del fondo del tab bar
+        // Color del fondo del tab bar
         UITabBar.appearance().backgroundColor = UIColor.azulSecundario
     }
     
@@ -28,10 +28,12 @@ struct NavegadorBasico: View {
             .badge(control.mensajes.count)
             
             Tab("Agregar usuario", systemImage: "person.badge.plus") {
-                Text("Pantalla de agregar usuario")
+                NavigationStack{
+                    RegistrarUsuario()
+                }
             }
             
-            Tab("Cosas que tengo", systemImage: "smile") {
+            Tab("Cosas que tengo", systemImage: "archivebox") {
                 Text("Pantalla de inventario")
             }
             
@@ -40,7 +42,7 @@ struct NavegadorBasico: View {
             }
         }
         
-        // color del icono y texto del tab seleccionado
+        // Color del icono y texto del tab seleccionado
         .tint(.white)
     }
 }

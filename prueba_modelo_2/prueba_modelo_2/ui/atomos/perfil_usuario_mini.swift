@@ -6,37 +6,40 @@
 //
 
 import SwiftUI
+import SwiftUI
+
 struct EtiquetaUsuarioPerfil: View {
+    
     var usuario: Usuario
     
     var body: some View {
-        VStack{
+        
+        VStack(spacing: 8){
             
-            Text("Esta conectado: ")
-                .foregroundStyle(Color.azulPrincipal)
-            ZStack(alignment: .bottom)
-            {
-                Image("usuario")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100)
-                    .clipShape(Circle())
-                    .padding(.vertical, 30)   // arriba y abajo
-                    .padding(.horizontal, 25) // izquierda y derecha
-                HStack{
-                    Text("\(usuario.apodo)")
-                        .foregroundStyle(Color.azulPrincipal)
-                        .fontWeight(.bold)
-                    Circle()
-                        .frame(width: 15)
-                        .foregroundStyle(usuario.conectado ? Color.green : Color.red)
-                }
+            Image("usuario")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 80, height: 80)
+                .clipShape(Circle())
+            
+            HStack(spacing: 6){
+                
+                Text(usuario.apodo)
+                    .foregroundStyle(Color.gris)
+                    .fontWeight(.bold)
+                    .font(.system(size: 14))
+                
+                Circle()
+                    .frame(width: 10)
+                    .foregroundStyle(usuario.conectado ? .green : .red)
+                
             }
-
+            
         }
-        .padding(15)
-        .background(Color.gris)
-        .cornerRadius(25)
+        .padding(12)
+        .background(Color.azulSecundario)
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .shadow(radius: 3)
         
     }
 }

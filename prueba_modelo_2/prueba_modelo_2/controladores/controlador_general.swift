@@ -17,7 +17,7 @@ class ControladorGeneral {
     }
     
     func agregar_mensajes() {
-        mensajes += [Mensaje(texto: "mensajes de: \(mensajes.count + 1)", id_usuario: nil)]
+        mensajes += [Mensaje(texto: "Hola, soy un nuevo mensaje numero \(mensajes.count + 1)", id_usuario: nil)]
     }
     
     func agregar_usuarios( _ usuario_nuevo: Usuario) {

@@ -8,69 +8,124 @@
 import SwiftUI
 
 struct PantallaBasica: View {
-    //@State var mensajes: [String] = ["hola 1", "hola 2", "hola 3"]
-    //@State var controlador = ControladorGeneral()
+    
     @Environment(ControladorGeneral.self) var controlador
     
     var body: some View {
         
-        Spacer()
-        
-        VStack{
-            Text("Esta pantalla me mueve a la siguiente opcion")
-        }
-        .foregroundStyle(Color.azulPrincipal)
-        .fontWeight(.bold)
-        
-        //Spacer()
-        ScrollView(.horizontal){
-            LazyHStack{
-                ForEach(controlador.usuarios) { usuario in
-                    NavigationLink{
-                        Text("Esta es la pantalla del \(usuario)")
-                    }
-                    label: {
-                        EtiquetaUsuarioPerfil(usuario: usuario)
-                            .padding(5)
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-        }
-        
-        ScrollView(.vertical){
-            LazyVStack{
-                ForEach(controlador.mensajes) { mensaje in
-                    NavigationLink{
-                        Text("Esta es la pantalla del \(mensaje)")
-                    }
-                    label: {
-                        PrevistaMensaje(mensaje: mensaje)
-                            .padding(.vertical, 5)   // arriba y abajo
-                            .padding(.horizontal, 25) // izquierda y derecha
-                    }
-                }
-            }
-        }
-        
-        Spacer()
-        VStack{
-            Text("Agregar un hola mundo")
-                .onTapGesture {
-                    controlador.agregar_mensajes()
-                }
-                .foregroundStyle(Color.azulPrincipal)
+        VStack(spacing: 15){
             
-            NavigationLink{
-                RegistrarUsuario()
+            // BARRA SUPERIOR
+            HStack{
+                Image(systemName: "message.fill")
+                
+                Text("El Mezenyer")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                
+                Spacer()
             }
-            label: {
-                Text("Pantalla a sobreponer")
-                    .foregroundStyle(Color.azulSecundario)
+            .padding()
+            .background(Color.azulPrincipal)
+            .foregroundStyle(.white)
+            
+            
+            // Seccion Usuarios
+            VStack(alignment: .leading){
+                
+                Text("Usuarios")
+                    .font(.headline)
+                    .foregroundStyle(Color.azulPrincipal)
+                    .padding(.horizontal)
+                
+                ScrollView(.horizontal){
+                    LazyHStack{
+                        ForEach(controlador.usuarios) { usuario in
+                            
+                            NavigationLink{
+                                PantallaUsuario(usuario: usuario)
+                            }
+                            label: {
+                                EtiquetaUsuarioPerfil(usuario: usuario)
+                                    .padding(5)
+                            }
+                            .buttonStyle(.plain)
+                            
+                        }
+                    }
+                    .padding(.horizontal)
+                }
             }
+            
+            
+            // Seccion Mensajes
+            VStack(alignment: .leading){
+                
+                Text("Mensajes")
+                    .font(.headline)
+                    .foregroundStyle(Color.azulPrincipal)
+                    .padding(.horizontal)
+                
+                ScrollView(.vertical){
+                    LazyVStack{
+                        
+                        ForEach(controlador.mensajes) { mensaje in
+                            
+                            NavigationLink{
+                                PantallaMensaje(mensaje: mensaje)
+                            }
+                            label: {
+                                PrevistaMensaje(mensaje: mensaje)
+                                    .padding(.vertical, 5)
+                                    .padding(.horizontal, 20)
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            
+            
+            Spacer()
+            
+            
+            // Botones de agregar mensaje y registrar usuario
+            VStack(spacing: 10){
+                
+                Button{
+                    controlador.agregar_mensajes()
+                } label: {
+                    
+                    HStack{
+                        Image(systemName: "plus.circle.fill")
+                        Text("Agregar mensaje")
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.azulPrincipal)
+                    .foregroundStyle(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    
+                }
+                
+                
+                NavigationLink{
+                    RegistrarUsuario()
+                }
+                label: {
+                    Text("Registrar nuevo usuario")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.azulSecundario)
+                        .foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                }
+                
+            }
+            .padding()
+            
         }
-        .padding(15)
-        
+        .background(Color.gris)
     }
 }
 
